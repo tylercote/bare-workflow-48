@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "expo": "^48.0.0",
+    "expo": "^48.0.4",
     "expo-updates": "^0.16.3",
     "react": "18.2.0",
     "react-native": "0.71.3"
