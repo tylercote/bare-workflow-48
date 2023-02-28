@@ -1,4 +1,15 @@
 {
   "name": "BareBeta",
-  "displayName": "BareBeta"
+  "displayName": "BareBeta",
+  "extra": {
+    "eas": {
+      "projectId": "be7c0908-734f-4602-87ae-76dfc17f1927"
+    }
+  },
+  "runtimeVersion": "1.0.0",
+  "updates": {
+    "url": "https://u.expo.dev/be7c0908-734f-4602-87ae-76dfc17f1927"
+  },
+  "android": {},
+  "ios": {}
 }
