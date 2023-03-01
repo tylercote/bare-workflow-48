@@ -15,6 +15,10 @@ import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
 
+import android.net.Uri;
+import expo.modules.updates.UpdatesController;
+import javax.annotation.Nullable;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -39,6 +43,24 @@ public class MainApplication extends Application implements ReactApplication {
         }
 
         @Override
+        protected @Nullable String getJSBundleFile() {
+            if (BuildConfig.DEBUG) {
+                return super.getJSBundleFile();
+            } else {
+                return UpdatesController.getInstance().getLaunchAssetFile();
+            }
+        }
+
+        @Override
+        protected @Nullable String getBundleAssetName() {
+            if (BuildConfig.DEBUG) {
+                return super.getBundleAssetName();
+            } else {
+                return UpdatesController.getInstance().getBundleAssetName();
+            }
+        }
+
+        @Override
         protected boolean isNewArchEnabled() {
           return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
         }
@@ -58,6 +80,11 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
+
+    if (!BuildConfig.DEBUG) {
+        UpdatesController.initialize(this);
+    }
+
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       DefaultNewArchitectureEntryPoint.load();
